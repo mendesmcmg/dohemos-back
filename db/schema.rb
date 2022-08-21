@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_21_222903) do
+ActiveRecord::Schema.define(version: 2022_08_21_224315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "blood_center_id", null: false
+    t.string "donor_name"
+    t.string "donor_email"
+    t.integer "donor_blood_type"
+    t.string "donor_telephone"
+    t.date "date"
+    t.time "time"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blood_center_id"], name: "index_appointments_on_blood_center_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
 
   create_table "blood_centers", force: :cascade do |t|
     t.string "name"
@@ -23,6 +39,15 @@ ActiveRecord::Schema.define(version: 2022_08_21_222903) do
     t.string "website"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "blood_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "status"
+    t.bigint "blood_center_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blood_center_id"], name: "index_blood_types_on_blood_center_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,4 +66,7 @@ ActiveRecord::Schema.define(version: 2022_08_21_222903) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "blood_centers"
+  add_foreign_key "appointments", "users"
+  add_foreign_key "blood_types", "blood_centers"
 end

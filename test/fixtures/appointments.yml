@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  blood_center: one
+  donor_name: MyString
+  donor_email: MyString
+  donor_blood_type: 1
+  donor_telephone: MyString
+  date: 2022-08-21
+  time: 2022-08-21 19:43:15
+
+two:
+  user: two
+  blood_center: two
+  donor_name: MyString
+  donor_email: MyString
+  donor_blood_type: 1
+  donor_telephone: MyString
+  date: 2022-08-21
+  time: 2022-08-21 19:43:15
